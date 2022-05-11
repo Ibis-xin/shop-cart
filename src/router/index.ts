@@ -21,6 +21,21 @@ const routes: Array<RouteRecordRaw> = [
     name: "cart",
     component: () => import("@/views/CartView.vue"),
   },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/LoginView.vue"),
+  },
+  {
+    path: "/store",
+    name: "store",
+    component: () => import("@/views/StoreView.vue"),
+  },
+  {
+    path: "/pay",
+    name: "pay",
+    component: () => import("@/views/PayView.vue"),
+  },
 ];
 
 const router = createRouter({
