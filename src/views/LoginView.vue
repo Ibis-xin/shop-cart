@@ -3,46 +3,41 @@
         <div class="col-3"></div>
         <div class="col-6">
             <b-form @submit="login">
-                <b-form-group label="E-mail">
-                    <b-form-input v-model="email" placeholder="Enter your email"></b-form-input>
-                </b-form-group>
-                <b-form-group label="password">
-                    <b-form-input type="password" v-model="password" placeholder="Enter your password"></b-form-input>
-                </b-form-group>
-                <b-button variant="primary" type="submit">Log In</b-button>
+                <b-input-group id="email">
+                    <b-input-group-text> E-mail </b-input-group-text>
+                    <b-form-input v-model="email" placeholder="example@email.com" required></b-form-input>
+                </b-input-group>
+                <br>
+                <b-input-group id="password">
+                    <b-input-group-text> password </b-input-group-text>
+                    <b-form-input v-model="password" :type="passwordShow ? 'password' : 'text'"
+                        placeholder="Enter your password" required></b-form-input>
+                    <b-input-group-append>
+                        <b-button variant="outline-secondary" @click="passwordShow = !passwordShow">
+                            <font-awesome-icon :icon="['fas', `eye${!passwordShow ?'-slash': ''}`]" />
+                        </b-button>
+                    </b-input-group-append>
+                </b-input-group>
             </b-form>
         </div>
         <div class="col-3"></div>
-        <div v-if="aa">{{ aa }}</div>
-        <div v-else>{{ password }}</div>
-
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 export default defineComponent({
-
     methods: {
         login() {
-            console.log(this.email + this.password)
+            console.log(this.email + this.password);//TODO 登入功能
         }
     },
-
     data() {
         return {
             email: "",
             password: "",
-        }
+            passwordShow: true,
+        };
     },
-    computed: {
-        aa(): boolean {
-            console.log(111)
-            if (this.password.length < 3)
-                return true
-            else
-                return false
-        }
-    },
-})
+});
 </script>
