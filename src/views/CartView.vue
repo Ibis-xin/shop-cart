@@ -1,5 +1,5 @@
 <template>
-    <checkout-card v-for="i in array" :key="i.name" :name="i.name" :price="i.price" :comment="i.comment"
+    <checkout-card v-for="i in array" :key="i.name" :name="i.name" :price="i.price" :amount="i.amount"
         :images="i.images" />
     <font size="6">Total ${{ total }}</font><br><br>
     <b-button size="lg" @click="pay()">pay</b-button>
@@ -8,13 +8,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import CheckoutCard from "@/components/CheckoutCard.vue";
-interface Data {
-    array: {
-        name: string;
-        price: number;
-        comment: string;
-        images: Array<string>;
-    }[];
+interface BuyData {
+    images: string;
+    name: string;
+    price: number;
+    amount: number;
 }
 
 export default defineComponent({
@@ -38,20 +36,22 @@ export default defineComponent({
         },
 
     },
-    data(): Data {
+    data(): {
+        array: BuyData[];
+    } {
         return {
             array: [
                 {
+                    images: "",
                     name: "c",
                     price: 20,
-                    comment: "",
-                    images: [""]
+                    amount: 0,
                 },
                 {
+                    images: "",
                     name: "d",
                     price: 10,
-                    comment: "",
-                    images: [""]
+                    amount: 0,
                 }],//TODO 串API
         }
     },
