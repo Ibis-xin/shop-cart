@@ -1,7 +1,6 @@
 <template>
     <b-card-group columns>
-        <commodity-card v-for="i in array" :key="i.name" :name="i.name" :price="i.price" :comment="i.comment"
-            :images="i.images" />
+        <commodity-card v-for="i in array" :key="i.name" :value="i" />
     </b-card-group>
 </template>
 
@@ -12,10 +11,12 @@ import CommodityCard from "@/components/CommodityCard.vue";
 interface CommodityData {
     name: string;
     price: number;
+    star: number;
     comment: string;
     images: string[];
 }
 
+const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMiLCJqdGkiOiIwMTdjN2RjZi1lNThhLTRjYzktODMzYS02OGM4NTFjZGFlZjYiLCJyb2xlcyI6WyJBZG1pbiIsIlVzZXJzIl0sIm5iZiI6MTY1MjQyMzM0MywiZXhwIjoxNjUyNTA5NzQzLCJpYXQiOjE2NTI0MjMzNDMsImlzcyI6Ikp3dEF1dGhEZW1vIn0.URkgbwk3u0Ch-7EWH-ZeTq5xTzqmaJ2qrRJBUc8jHcE`;
 export default defineComponent({
 
     name: 'StoreView',
@@ -27,10 +28,11 @@ export default defineComponent({
     async created() {
         try {
             let res = await this.axios.get(
-                "https://localhost:5001/api/Commodity/Commodities",
+                "/api/Commodity/Commodities",
                 {
                     headers: {
-                        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMiLCJqdGkiOiI3YTc0ODdlNC0wNDYwLTRjYzctYjc2Zi1hOTVjZjcxYWU1MjIiLCJyb2xlcyI6WyJBZG1pbiIsIlVzZXJzIl0sIm5iZiI6MTY1MjMzNTM1MSwiZXhwIjoxNjUyNDIxNzUxLCJpYXQiOjE2NTIzMzUzNTEsImlzcyI6Ikp3dEF1dGhEZW1vIn0.et8fuip24Vj5ZF9G20vr6lTpdlkFX8GDsG_v_nqQltU` // Bearer 跟 token 中間有一個空格
+                        // Bearer 跟 token 中間有一個空格
+                        Authorization: `Bearer ${token}`
                     }
                 })
             this.array = res.data as CommodityData[]
@@ -48,6 +50,7 @@ export default defineComponent({
                 {
                     name: "",
                     price: 0,
+                    star: 0,
                     comment: "",
                     images: [""]
                 },
