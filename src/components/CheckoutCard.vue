@@ -3,7 +3,7 @@
         <div>images: {{ images }}</div>
         <div>name: {{ name }}</div>
         <div>price: {{ price }}</div>
-        <div>comment: {{ comment }}</div>
+        <div>amount: {{ amount }}</div>
         <b-button variant="danger">remove from cart</b-button>
         </b-card>
         <br>
@@ -23,12 +23,12 @@ export default defineComponent({
             type: Object as PropType<number>,
             required: true
         },
-         comment: {
-            type: Object as PropType<string>,
+         amount: {
+            type: Object as PropType<number>,
             required: true
         }, 
         images: {
-            type: Object as PropType<Array<string>>,
+            type: Object as PropType<string>,
             required: true
         },
     },

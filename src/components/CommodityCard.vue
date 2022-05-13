@@ -1,28 +1,13 @@
 <template>
-    <b-card>
-        <b-row>
-            <b-col>
-                <div>images: {{ images }}</div>
-                <div>name: {{ name }}</div>
-                <div>price: {{ price }}</div>
-                <div>comment: {{ comment }}</div>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col sm="3"></b-col>
-            <b-col sm="6">
-                <b-input-group>
-                    <b-input-group-text>amount</b-input-group-text>
-                    <b-form-input type="number" min="0.00"></b-form-input>
-                    <b-input-group-append>
-                        <b-button variant="outline-secondary">add</b-button>
-                    </b-input-group-append>
-                </b-input-group>
-            </b-col>
-            <b-col sm="3"></b-col>
-        </b-row>
+    <b-card :img-src="`data:image/png;base64,${images[0]}`" img-alt="Image" img-top img-height="200" tag="article"
+        class="mb-2" style="max-width: 20rem">
+        <b-card-title style="text-align:left;"> {{ name }}</b-card-title>
+        <b-card-sub-title style="text-align:right;">${{ price }}</b-card-sub-title>
+        <b-card-text style="text-align:left;">{{ comment }}</b-card-text>
+        <template #footer>
+            <small class="text-muted" style="text-align:right;">☆★★★★（4.9/5）</small>
+        </template>
     </b-card>
-    <br>
 </template>
 
 <script lang="ts">
@@ -33,21 +18,20 @@ export default defineComponent({
     props: {
         name: {
             type: Object as PropType<string>,
-            required: true
+            required: true,
         },
         price: {
             type: Object as PropType<number>,
-            required: true
+            required: true,
         },
         comment: {
             type: Object as PropType<string>,
-            required: true
+            required: true,
         },
         images: {
             type: Object as PropType<Array<string>>,
-            required: true
+            required: true,
         },
     },
-
-})
+});
 </script>
