@@ -39,7 +39,7 @@ export default defineComponent({
       // console.log(this.loginData); //TODO 登入功能
 
       this.axios.post(
-        "https://localhost:5001/api/Login",
+        "/api/Login",
         {
           "expireMinutes": 43200
         },
