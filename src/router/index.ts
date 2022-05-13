@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
 const routes: Array<RouteRecordRaw> = [
@@ -37,13 +37,19 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/PayView.vue"),
   },
   {
-    path:'/:pathMatch(.*)',
-    name:'404', 
+    path: "/commodity",
+    name: "commodity",
+    component: () => import("@/views/CommodityView.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)",
+    name: "404",
     component: () => import("@/views/NotFoundView.vue"),
-}
+  },
 ];
 
 const router = createRouter({
+  // history:createWebHashHistory(),
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
