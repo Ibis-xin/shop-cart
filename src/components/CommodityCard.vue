@@ -8,19 +8,14 @@
 </template>
 
 <script lang="ts">
+import { Commodity } from "@/store/commodity";
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
     name: "CommodityCard",
     props: {
         value: {
-            type: Object as PropType<{
-                name: string,
-                price: number,
-                star: number,
-                comment: string,
-                images: Array<string>,
-            }>,
+            type: Object as PropType<Commodity>,
             required: true,
         }
     },

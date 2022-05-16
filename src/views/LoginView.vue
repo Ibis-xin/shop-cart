@@ -18,7 +18,7 @@
             </b-button>
           </b-input-group-append>
         </b-input-group>
-        <br>
+        <br />
         <b-button type="submit" @click="login()" variant="primary">login</b-button>
       </b-form>
     </div>
@@ -27,32 +27,26 @@
 </template>
 
 <script lang="ts">
+import { LoginPayload } from "@/store/login";
 import { defineComponent } from "vue";
+import { useStore } from "vuex";
 interface LoginData {
   email: string;
   password: string;
 }
 
 export default defineComponent({
+  setup() {
+    const store = useStore();
+    return { store };
+  },
   methods: {
-    login() {
-      // console.log(this.loginData); //TODO 登入功能
-
-      this.axios.post(
-        "/api/Login",
-        {
-          "expireMinutes": 43200
-        },
-        {
-          auth: {
-            username: this.loginData.email,
-            password: this.loginData.password
-          }
-        })
-        .then((response) => {
-          console.log(response.data)
-        })
-
+    async login() {
+      let auth: LoginPayload = {
+        username: this.loginData.email,
+        password: this.loginData.password,
+      };
+      await this.store.dispatch("postLogin", auth);
     },
   },
   data(): {

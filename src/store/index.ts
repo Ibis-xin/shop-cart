@@ -1,14 +1,10 @@
-import { createStore } from 'vuex'
+import { commodity } from './commodity';
+import { createStore } from "vuex";
+import { login } from "./login";
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
-  }
-})
+    Login: login,
+    Commodity: commodity,
+  },
+});
