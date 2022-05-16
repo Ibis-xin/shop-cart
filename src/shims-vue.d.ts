@@ -4,3 +4,6 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+// https://codertw.com/程式語言/746042/
+declare module 'vue3-burger-menu'

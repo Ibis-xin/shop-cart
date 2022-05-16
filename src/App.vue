@@ -1,29 +1,32 @@
 <template>
-  <b-header></b-header>
-  <nav>
+  <b-header class="header">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
-    <router-link to="/store">Store</router-link>
-  </nav>
-  <sidebar-menu :menu="menu" />
-  <div class="container">
-    <div class="row">
-      <div class="col-3"></div>
-      <div class="col-6">
-        <router-view />
+    <router-link to="/store">Store</router-link> |
+  </b-header>
+
+  <PushRotate>
+    <router-link to="/login">Login</router-link>
+    <router-link to="/account">Account</router-link>
+    <router-link to="/cart">Cart</router-link>
+  </PushRotate>
+
+  <div id="page-wrap">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-md-6">
+          <router-view />
+        </div>
       </div>
-      <div class="col-3"></div>
     </div>
+    <b-footer>
+      <hr />
+      @XIN
+    </b-footer>
   </div>
-  <b-footer>
-    <hr>@XIN
-  </b-footer>
 </template>
 
 <style lang="scss">
-.router-link-active{
-  background-color: #2c3e50;
-}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,7 +35,7 @@
   color: #2c3e50;
 }
 
-nav {
+.header {
   padding: 30px;
 
   a {
@@ -48,11 +51,12 @@ nav {
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { SidebarMenu } from "vue-sidebar-menu";
-import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
+
+// https://www.npmjs.com/package/vue3-burger-menu
+import { PushRotate } from "vue3-burger-menu";
 export default defineComponent({
   components: {
-    SidebarMenu,
+    PushRotate,
   },
 
   methods: {},
