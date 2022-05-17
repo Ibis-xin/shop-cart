@@ -1,6 +1,6 @@
 <template>
     <b-card-group columns>
-        <commodity-card v-for="i in getterCommodities" :key="i.name" :value="i" />
+        <commodity-card @click="toCommodity(i.name)" v-for="i in getterCommodities" :key="i.name" :value="i" />
     </b-card-group>
 </template>
 
@@ -10,21 +10,27 @@ import CommodityCard from "@/components/CommodityCard.vue";
 import { mapGetters, useStore } from "vuex";
 
 export default defineComponent({
-    name: 'StoreView',
+    name: "StoreView",
 
     setup() {
-        const store = useStore()
-        return { store }
+        const store = useStore();
+        return { store };
     },
     components: {
         CommodityCard,
     },
 
+    methods: {
+        toCommodity(name: string) {
+            this.$router.push({ path: '/commodity/' + name })
+        },
+    },
+
     async created() {
-          await this.store.dispatch("getCommodities")
+        await this.store.dispatch("getCommodities");
     },
-    computed:{
-        ...mapGetters(["getterCommodities"])
+    computed: {
+        ...mapGetters(["getterCommodities"]),
     },
-})
+});
 </script>
