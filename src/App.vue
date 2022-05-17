@@ -4,13 +4,13 @@
     <router-link to="/about">About</router-link> |
     <router-link to="/store">Store</router-link> |
   </b-header>
-
-  <PushRotate>
-    <router-link to="/login">Login</router-link>
-    <router-link to="/account">Account</router-link>
-    <router-link to="/cart">Cart</router-link>
-  </PushRotate>
-
+  <div class="row">
+    <PushRotate>
+      <router-link to="/login">Login</router-link>
+      <router-link to="/account">Account</router-link>
+      <router-link to="/cart">Cart</router-link>
+    </PushRotate>
+  </div>
   <div id="page-wrap">
     <div class="container">
       <div class="row justify-content-md-center">
