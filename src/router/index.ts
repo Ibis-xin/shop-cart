@@ -47,8 +47,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/PayView.vue"),
   },
   {
-    path: "/commodity",
-    name: "commodity",
+    path: "/commodity/:name",
     component: () => import("@/views/CommodityView.vue"),
   },
   {
@@ -65,3 +64,4 @@ const router = createRouter({
 });
 
 export default router;
+
