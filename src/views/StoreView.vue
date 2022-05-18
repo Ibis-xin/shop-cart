@@ -1,6 +1,6 @@
 <template>
     <b-card-group columns>
-        <commodity-card @click="toCommodity(i.name)" v-for="i in getterCommodities" :key="i.name" :value="i" />
+        <commodity-card @click="toCommodity(i.id)" v-for="i in getterCommodities" :key="i.id" :value="i" />
     </b-card-group>
 </template>
 
@@ -21,8 +21,8 @@ export default defineComponent({
     },
 
     methods: {
-        toCommodity(name: string) {
-            this.$router.push({ path: '/commodity/' + name })
+        toCommodity(id: number) {
+            this.$router.push({ path: '/commodity/' + id })
         },
     },
 

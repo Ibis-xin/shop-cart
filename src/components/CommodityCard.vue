@@ -2,6 +2,7 @@
     <b-card :img-src="`data:image/png;base64,${value.images[0]}`" img-alt="Image" img-top img-height="200" tag="article"
         style="max-width: 20rem">
         <b-card-sub-title style="text-align:right;">${{ value.price }}</b-card-sub-title>
+        <b-button>123</b-button>
         <b-card-text class="text-muted" style="text-align:right;">{{ value.star }}
         </b-card-text>
     </b-card>
