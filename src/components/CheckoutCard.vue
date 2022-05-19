@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { CartCommodity } from "@/store/cartlist";
+import { CartCommodity } from "@/store/cart-list";
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({

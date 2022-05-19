@@ -15,7 +15,7 @@ interface CartState {
   cartCommodities: CartCommodity[];
 }
 
-export const cartlist: Module<CartState, any> = {
+export const cartList: Module<CartState, any> = {
   state: {
     cartCommodities: [],
   },

@@ -1,12 +1,12 @@
 import { createStore } from "vuex";
 import { commodity } from "./commodity";
 import { login } from "./login";
-import { cartlist } from "./cartList";
+import { cartList } from "./cart-list";
 
 export default createStore({
   modules: {
     Login: login,
     Commodity: commodity,
-    Cartlist: cartlist,
+    CartList: cartList,
   },
 });

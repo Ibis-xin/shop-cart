@@ -4,7 +4,7 @@ import {
   createWebHistory,
   RouteRecordRaw,
 } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import HomeView from "../views/main/HomeView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -19,36 +19,36 @@ const routes: Array<RouteRecordRaw> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+      import(/* webpackChunkName: "about" */ "../views/main/AboutView.vue"),
   },
   {
     path: "/cart",
     name: "cart",
-    component: () => import("@/views/CartView.vue"),
+    component: () => import("@/views/pay/CartView.vue"),
   },
   {
     path: "/login",
     name: "login",
-    component: () => import("@/views/LoginView.vue"),
+    component: () => import("@/views/member/LoginView.vue"),
   },
   {
     path: "/account",
     name: "account",
-    component: () => import("@/views/AccountView.vue"),
+    component: () => import("@/views/member/AccountView.vue"),
   },
   {
     path: "/store",
     name: "store",
-    component: () => import("@/views/StoreView.vue"),
+    component: () => import("@/views/shop/StoreView.vue"),
   },
   {
     path: "/pay",
     name: "pay",
-    component: () => import("@/views/PayView.vue"),
+    component: () => import("@/views/pay/PayView.vue"),
   },
   {
     path: "/commodity/:name",
-    component: () => import("@/views/CommodityView.vue"),
+    component: () => import("@/views/shop/CommodityView.vue"),
   },
   {
     path: "/:pathMatch(.*)",

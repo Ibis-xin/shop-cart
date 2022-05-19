@@ -23,7 +23,7 @@
 import { defineComponent } from "vue";
 import { mapGetters, useStore } from "vuex";
 import { useRoute } from "vue-router";
-import { CartCommodity } from "@/store/cartlist";
+import { CartCommodity } from "@/store/cart-list";
 
 export default defineComponent({
     name: "CommodityView",
