@@ -1,5 +1,5 @@
 <template>
-    <b-card :img-src="`data:image/jpg;base64,${cartvalue.images}`" img-alt="Image" img-top img-height="200" tag="article"
+    <b-card :img-src="`data:image/jpg;base64,${cartvalue.image}`" img-alt="Image" img-top img-height="200" tag="article"
         style="max-width: 20rem">
         <div>name: {{ cartvalue.name }}</div>
         <div>price: {{ cartvalue.price }}</div>
@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { CartCommodity } from "@/store/cart-list";
+import CartCommodity from "@/model/cart/cart-commodity";
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({

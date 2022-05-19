@@ -23,7 +23,7 @@
 import { defineComponent } from "vue";
 import { mapGetters, useStore } from "vuex";
 import { useRoute } from "vue-router";
-import { CartCommodity } from "@/store/cart-list";
+import CartCommodity from "@/model/cart/cart-commodity";
 
 export default defineComponent({
     name: "CommodityView",
@@ -45,6 +45,10 @@ export default defineComponent({
 
     methods: {
         addToCart(commodity: CartCommodity, amount: number) {
+            if (amount <= 0) {
+                alert("數量不可為0")
+                return
+            }
             this.store.dispatch("addToCart", { commodity: commodity, amount: amount });
         },
     },

@@ -5,7 +5,7 @@
         <b-input-group id="email">
           <b-input-group-text> E-mail </b-input-group-text>
           <b-form-input
-            v-model="loginData.email"
+            v-model="loginData.username"
             placeholder="example@email.com"
             required
           ></b-form-input>
@@ -33,13 +33,9 @@
 </template>
 
 <script lang="ts">
-import { LoginPayload } from "@/store/login";
+import Auth from "@/model/login/auth";
 import { defineComponent } from "vue";
 import { useStore } from "vuex";
-interface LoginData {
-  email: string;
-  password: string;
-}
 
 export default defineComponent({
   setup() {
@@ -50,25 +46,25 @@ export default defineComponent({
   methods: {
     async login() {
       const regex = new RegExp(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/) // eslint-disable-line
-      if (regex.test(this.loginData.email)) {
+      if (regex.test(this.loginData.username)) {
         alert("true");
       } else {
         alert("false");
       }
-      let auth: LoginPayload = {
-        username: this.loginData.email,
+      let auth: Auth = {
+        username: this.loginData.username,
         password: this.loginData.password,
       };
       await this.store.dispatch("postLogin", auth);
     },
   },
   data(): {
-    loginData: LoginData;
+    loginData: Auth;
     passwordShow: boolean;
   } {
     return {
       loginData: {
-        email: "",
+        username: "",
         password: "",
       },
       passwordShow: true,

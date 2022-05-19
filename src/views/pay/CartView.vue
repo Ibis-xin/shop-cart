@@ -11,7 +11,7 @@ import { defineComponent } from "vue";
 import CheckoutCard from "@/components/CheckoutCard.vue";
 import { mapGetters, useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { CartCommodity } from "@/store/cart-list";
+import CartCommodity from "@/model/cart/cart-commodity";
 
 export default defineComponent({
 

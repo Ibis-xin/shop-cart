@@ -1,15 +1,6 @@
-import { Commodity } from "./commodity";
+import Commodity from "@/model/commodity/commodity";
 import { Module } from "vuex";
-
-export interface CartCommodity {
-  id: string;
-  name: string;
-  price: number;
-  comment: string;
-  amount: number;
-  star: number;
-  images: string;
-}
+import CartCommodity from "../model/cart/cart-commodity";
 
 interface CartState {
   cartCommodities: CartCommodity[];
@@ -32,17 +23,10 @@ export const cartList: Module<CartState, any> = {
 
   actions: {
     addToCart({ commit }, payload: { commodity: Commodity; amount: number }) {
-      console.log(payload);
-      const data: CartCommodity = {
-        id: payload.commodity.id,
-        name: payload.commodity.name,
-        price: payload.commodity.price,
-        comment: payload.commodity.comment,
-        amount: payload.amount,
-        star: payload.commodity.star,
-        images: payload.commodity.images[0],
-      };
-      commit("UPDATE_CART", data);
+      commit(
+        "UPDATE_CART",
+        new CartCommodity(payload.commodity, payload.amount)
+      );
     },
   },
 };

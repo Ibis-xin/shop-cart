@@ -1,14 +1,6 @@
 import { Module } from "vuex";
 import axios from "axios";
-
-export interface Commodity {
-  id: string;
-  name: string;
-  price: number;
-  comment: string;
-  star: number;
-  images: Array<string>;
-}
+import Commodity from "@/model/commodity/commodity";
 
 interface CommodityState {
   commodities: Commodity[];
@@ -18,7 +10,7 @@ interface CommodityState {
 export const commodity: Module<CommodityState, any> = {
   state: {
     commodities: [],
-    commodity: { id: "", name: "", price: 0, comment: "", star: 0, images: [] },
+    commodity: new Commodity(),
   },
 
   getters: {

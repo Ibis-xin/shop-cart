@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { Commodity } from "@/store/commodity";
+import Commodity from "@/model/commodity/commodity";
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({

@@ -1,17 +1,10 @@
 import { Module } from "vuex";
 import axios from "axios";
+import Auth from "@/model/login/auth";
+import Token from "@/model/login/token";
 
 interface LoginState {
   token: string;
-}
-
-interface LoginResponse {
-  token: string;
-}
-
-export interface LoginPayload {
-  username: string;
-  password: string;
 }
 
 export const login: Module<LoginState, any> = {
@@ -20,12 +13,12 @@ export const login: Module<LoginState, any> = {
     getToken: (state) => state.token,
   },
   mutations: {
-    UPDATE_LOGIN(state, payload: LoginResponse) {
+    UPDATE_LOGIN(state, payload: Token) {
       state.token = payload.token;
     },
   },
   actions: {
-    async postLogin({ commit }, payload: LoginPayload) {
+    async postLogin({ commit }, payload: Auth) {
       await axios
         .post(
           "/api/Login",
@@ -37,8 +30,7 @@ export const login: Module<LoginState, any> = {
           }
         )
         .then((response) => {
-            console.log("1234")
-          commit("UPDATE_LOGIN", response.data as LoginResponse);
+          commit("UPDATE_LOGIN", response.data as Token);
         });
     },
   },
