@@ -1,35 +1,24 @@
 <template>
-        <b-card>
-        <div>images: {{ images }}</div>
-        <div>name: {{ name }}</div>
-        <div>price: {{ price }}</div>
-        <div>amount: {{ amount }}</div>
+    <b-card :img-src="`data:image/jpg;base64,${cartvalue.images}`" img-alt="Image" img-top img-height="200" tag="article"
+        style="max-width: 20rem">
+        <div>name: {{ cartvalue.name }}</div>
+        <div>price: {{ cartvalue.price }}</div>
+        <div>amount: {{ cartvalue.amount }}</div>
         <b-button variant="danger">remove from cart</b-button>
-        </b-card>
-        <br>
+    </b-card>
+    <br>
 </template>
 
 <script lang="ts">
-import { defineComponent ,PropType} from "vue";
+import { CartCommodity } from "@/store/cartlist";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
     name: "CheckoutCard",
     props: {
-        name: {
-            type: Object as PropType<string>,
-            required: true
-        },
-         price: {
-            type: Object as PropType<number>,
-            required: true
-        },
-         amount: {
-            type: Object as PropType<number>,
-            required: true
-        }, 
-        images: {
-            type: Object as PropType<string>,
-            required: true
+        cartvalue: {
+            type: Object as PropType<CartCommodity>,
+            required: true,
         },
     },
 
