@@ -3,4 +3,7 @@ export default interface PayContent {
     id: string;
     amount: number;
   }[];
+  address: string;
+  name: string;
+  phone: string;
 }
