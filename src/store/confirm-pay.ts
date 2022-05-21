@@ -33,7 +33,6 @@ export const confirmPay: Module<PayState, any> = {
         })
         .then((response) => {
           commit("UPDATE_PAY", response.data as PayResponse);
-          console.log(response.data)
         });
     },
   },
