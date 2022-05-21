@@ -1,7 +1,7 @@
 <template>
     <b-card>
         <div>
-            <b-form @submit="pay" v-if="show">
+            <b-form @submit="confirmPay(getPayContent)" v-if="show">
                 <b-form-group id="input-group-1" label="Your Name:" label-for="input-1">
                     <b-form-input id="input-1" v-model="form.name" placeholder="Enter name" required></b-form-input>
                 </b-form-group>
@@ -16,14 +16,17 @@
                     </b-form-input>
                 </b-form-group>
                 <b-button type="back" variant="outline-primary" @click="backcart()">back</b-button>&emsp;
-                <b-button  variant="primary" type="submit">confirm pay</b-button>
+                <b-button variant="primary" type="submit">confirm pay</b-button>
             </b-form>
         </div>
     </b-card>
 </template>
 
 <script lang="ts">
+import CartCommodity from '@/model/cart/cart-commodity';
+import PayContent from '@/model/pay/pay-content';
 import { ref, computed, reactive, nextTick, defineComponent } from 'vue'
+import { mapActions, mapGetters, useStore } from 'vuex';
 
 export default defineComponent({
     setup() {
@@ -48,17 +51,29 @@ export default defineComponent({
                 show.value = true
             })
         }
+        const store = useStore();
 
-        return { show, form, onSubmit, onReset }
+        return { show, form, store, onSubmit, onReset }
     },
     methods: {
+        ...mapActions(['confirmPay']),
         backcart() {
             //TODO this.$router.push({ name: 'cart' })
             this.$router.go(-1)
         },
-        pay() {
-            console.log("pay")
-        }
     },
+    computed: {
+        ...mapGetters(["getterCart"]),
+        getPayContent() {
+            let result: PayContent = { value: [] }
+            this.getterCart.forEach((element: CartCommodity) => {
+                result.value.push({
+                    id: element.id,
+                    amount: element.amount
+                })
+            });
+            return result
+        }
+    }
 });
 </script>
