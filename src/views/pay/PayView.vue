@@ -23,57 +23,62 @@
 </template>
 
 <script lang="ts">
-import CartCommodity from '@/model/cart/cart-commodity';
-import PayContent from '@/model/pay/pay-content';
-import { ref, computed, reactive, nextTick, defineComponent } from 'vue'
-import { mapActions, mapGetters, useStore } from 'vuex';
+import CartCommodity from "@/model/cart/cart-commodity";
+import PayContent from "@/model/pay/pay-content";
+import { ref, computed, reactive, nextTick, defineComponent } from "vue";
+import { mapActions, mapGetters, useStore } from "vuex";
 
 export default defineComponent({
     setup() {
-        const show = ref(true)
+        const show = ref(true);
         const form = reactive({
-            name: '',
-            address: '',
-            phone: '',
-        })
+            name: "",
+            address: "",
+            phone: "",
+        });
         const onSubmit = (event: any) => {
-            event.preventDefault()
-            alert(JSON.stringify(form))
-        }
+            event.preventDefault();
+            alert(JSON.stringify(form));
+        };
 
         const onReset = (event: any) => {
-            event.preventDefault()
-            form.name = ''
-            form.address = ''
-            form.phone = ''
-            show.value = false
+            event.preventDefault();
+            form.name = "";
+            form.address = "";
+            form.phone = "";
+            show.value = false;
             nextTick(() => {
-                show.value = true
-            })
-        }
+                show.value = true;
+            });
+        };
         const store = useStore();
 
-        return { show, form, store, onSubmit, onReset }
+        return { show, form, store, onSubmit, onReset };
     },
     methods: {
-        ...mapActions(['confirmPay']),
+        ...mapActions(["confirmPay"]),
         backcart() {
             //TODO this.$router.push({ name: 'cart' })
-            this.$router.go(-1)
+            this.$router.go(-1);
         },
     },
     computed: {
         ...mapGetters(["getterCart"]),
         getPayContent() {
-            let result: PayContent = { value: [] }
+            let result: PayContent = {
+                value: [],
+                address: this.form.address,
+                name: this.form.name,
+                phone: this.form.phone
+            };
             this.getterCart.forEach((element: CartCommodity) => {
                 result.value.push({
                     id: element.id,
-                    amount: element.amount
-                })
+                    amount: element.amount,
+                });
             });
-            return result
-        }
-    }
+            return result;
+        },
+    },
 });
 </script>

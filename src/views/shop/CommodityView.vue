@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapGetters, useStore } from "vuex";
+import { mapActions, mapGetters, useStore } from "vuex";
 import { useRoute } from "vue-router";
 import CartCommodity from "@/model/cart/cart-commodity";
 
@@ -35,7 +35,6 @@ export default defineComponent({
     },
 
     async created() {
-        console.log(this.route.params.name);
         await this.store.dispatch("getCommodityDetal", this.route.params.name);
     },
 
@@ -44,16 +43,17 @@ export default defineComponent({
     },
 
     methods: {
+        ...mapActions(["addCommodity"]),
         addToCart(commodity: CartCommodity, amount: number) {
             if (amount <= 0) {
                 alert("數量不可為0")
                 return
             }
-            this.store.dispatch("addToCart", { commodity: commodity, amount: amount });
+            this.addCommodity({ commodity: commodity, amount: amount })
             alert("已加入購物車")
         },
     },
 
-    data() { return { amount: 0 } },
+    data() { return { amount: 1 } },
 });
 </script>

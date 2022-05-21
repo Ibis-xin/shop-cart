@@ -4,7 +4,7 @@
         <div>name: {{ cartvalue.name }}</div>
         <div>price: {{ cartvalue.price }}</div>
         <div>amount: {{ cartvalue.amount }}</div>
-        <b-button variant="danger">remove from cart</b-button>
+        <b-button variant="danger" @click="removeCartCommodity(cartvalue.id)">remove from cart</b-button>
     </b-card>
     <br>
 </template>
@@ -12,6 +12,7 @@
 <script lang="ts">
 import CartCommodity from "@/model/cart/cart-commodity";
 import { defineComponent, PropType } from "vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default defineComponent({
     name: "CheckoutCard",
@@ -21,6 +22,9 @@ export default defineComponent({
             required: true,
         },
     },
+    methods: {
+        ...mapActions(["removeCartCommodity"])
+    }
 
 })
 </script>

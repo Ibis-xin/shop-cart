@@ -16,17 +16,49 @@ export const cartList: Module<CartState, any> = {
   },
 
   mutations: {
-    UPDATE_CART(state, payload: CartCommodity) {
+    ADD_COMMODITY(state, payload: CartCommodity) {
       state.cartCommodities.push(payload);
+    },
+    ADD_AMOUNT_IN_INDEX(
+      { cartCommodities },
+      payload: { index: number; amount: number }
+    ) {
+      cartCommodities[payload.index].amount += payload.amount;
+    },
+    REMOVE_COMMODITY({ cartCommodities }, index: number) {
+      cartCommodities.splice(index, 1);
     },
   },
 
   actions: {
-    addToCart({ commit }, payload: { commodity: Commodity; amount: number }) {
-      commit(
-        "UPDATE_CART",
-        new CartCommodity(payload.commodity, payload.amount)
-      );
+    removeCartCommodity({ commit, getters }, id: string) {
+      for (let i = 0; i < getters.getterCart.length; i++) {
+        if (getters.getterCart[i].id == id) {
+          commit("REMOVE_COMMODITY", i);
+          break;
+        }
+      }
+    },
+    addCommodity(
+      { commit, getters },
+      payload: { commodity: Commodity; amount: number }
+    ) {
+      let addCart = true;
+
+      for (let i = 0; i < getters.getterCart.length; i++) {
+        if (payload.commodity.id == getters.getterCart[i].id) {
+          commit("ADD_AMOUNT_IN_INDEX", { index: i, amount: payload.amount });
+          addCart = false;
+          break;
+        }
+      }
+
+      if (addCart) {
+        commit(
+          "ADD_COMMODITY",
+          new CartCommodity(payload.commodity, payload.amount)
+        );
+      }
     },
   },
 };

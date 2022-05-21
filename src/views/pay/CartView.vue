@@ -35,7 +35,6 @@ export default defineComponent({
 
     computed: {
         ...mapGetters(["getterCart"]),//顯示加入購物車的內容
-
         total() {
             let result = 0
             this.getterCart.forEach((e: CartCommodity) => {
