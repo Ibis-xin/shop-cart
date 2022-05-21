@@ -13,8 +13,8 @@ export const login: Module<LoginState, any> = {
     getToken: (state) => state.token,
   },
   mutations: {
-    UPDATE_LOGIN(state, payload: Token) {
-      state.token = payload.token;
+    UPDATE_LOGIN({ token }, payload: string) {
+      token = payload;
     },
   },
   actions: {
@@ -30,7 +30,7 @@ export const login: Module<LoginState, any> = {
           }
         )
         .then((response) => {
-          commit("UPDATE_LOGIN", response.data as Token);
+          commit("UPDATE_LOGIN", (response.data as Token).token);
         });
     },
   },
