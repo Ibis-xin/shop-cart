@@ -50,6 +50,7 @@ export default defineComponent({
                 return
             }
             this.store.dispatch("addToCart", { commodity: commodity, amount: amount });
+            alert("已加入購物車")
         },
     },
 
