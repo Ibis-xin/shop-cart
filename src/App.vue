@@ -1,28 +1,27 @@
 <template>
-  <b-header class="header">
+  <header class="header">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/store">Store</router-link> |
-  </b-header>
-  <div class="row">
-    <PushRotate>
-      <router-link to="/login">Login</router-link>
-      <router-link to="/account">Account</router-link>
-      <router-link to="/cart">Cart</router-link>
-    </PushRotate>
-  </div>
+  </header>
+  <PushRotate>
+    <router-link to="/login">Login</router-link>
+    <router-link to="/account">Account</router-link>
+    <router-link to="/cart">Cart</router-link>
+  </PushRotate>
   <div id="page-wrap">
     <div class="container">
-      <div class="row justify-content-md-center">
+      <div class="row justify-content-md-center" id="content-wrap">
         <div class="col-md-6">
           <router-view />
         </div>
       </div>
+
+      <footer class="footer">
+        <hr>
+        @XIN
+      </footer>
     </div>
-    <b-footer>
-      <hr />
-      @XIN
-    </b-footer>
   </div>
 </template>
 
@@ -46,6 +45,22 @@
       color: #42b983;
     }
   }
+}
+
+.container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
 }
 </style>
 
