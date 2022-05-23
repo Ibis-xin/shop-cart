@@ -26,6 +26,7 @@
 import CartCommodity from "@/model/cart/cart-commodity";
 import PayContent from "@/model/pay/pay-content";
 import { ref, computed, reactive, nextTick, defineComponent } from "vue";
+import { useRouter } from "vue-router";
 import { mapActions, mapGetters, useStore } from "vuex";
 
 export default defineComponent({
@@ -52,14 +53,15 @@ export default defineComponent({
             });
         };
         const store = useStore();
+        const router = useRouter();
 
-        return { show, form, store, onSubmit, onReset };
+        return { show, form, store, router, onSubmit, onReset };
     },
     methods: {
         ...mapActions(["confirmPay"]),
         backcart() {
             //TODO this.$router.push({ name: 'cart' })
-            this.$router.go(-1);
+            this.router.go(-1);
         },
     },
     computed: {
