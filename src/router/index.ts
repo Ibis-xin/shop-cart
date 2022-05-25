@@ -47,6 +47,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/pay/PayView.vue"),
   },
   {
+    path: "/remittance",
+    name:"remittance",
+    component:()=>import("@/views/pay/RemittanceView.vue")
+  },
+  {
     path: "/commodity/:name",
     component: () => import("@/views/shop/CommodityView.vue"),
   },
@@ -64,4 +69,3 @@ const router = createRouter({
 });
 
 export default router;
-

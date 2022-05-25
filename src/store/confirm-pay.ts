@@ -18,12 +18,15 @@ export const confirmPay: Module<PayState, any> = {
 
   mutations: {
     UPDATE_PAY({ payContent }, payload: PayResponse) {
-      payContent = payload;
+       payContent.account = payload.account;
+       payContent.deadline = payload.deadline;
+       payContent.consumerDetails = payload.consumerDetails
     },
   },
 
   actions: {
     async confirmPay({ commit, getters }, payload: PayContent) {
+
       await axios
         .post("/api/Member/Payment", payload, {
           headers: {

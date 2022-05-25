@@ -1,11 +1,11 @@
 export default class PayResponse {
   constructor(
-    public consumerDetails?: {
+    public account: string = "",
+    public deadline: string = "",
+    public consumerDetails: {
       name: string;
       price: number;
       amount: number;
-    }[],
-    public account: string = '',
-    public deadline: string=""
+    }[]=[]
   ) {}
 }

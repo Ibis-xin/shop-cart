@@ -1,7 +1,7 @@
 <template>
     <b-card>
         <div>
-            <b-form @submit="confirmPay(getPayContent)" v-if="show">
+            <b-form @submit="pay(getPayContent)" v-if="show">
                 <b-form-group id="input-group-1" label="Your Name:" label-for="input-1">
                     <b-form-input id="input-1" v-model="form.name" placeholder="Enter name" required></b-form-input>
                 </b-form-group>
@@ -25,7 +25,7 @@
 <script lang="ts">
 import CartCommodity from "@/model/cart/cart-commodity";
 import PayContent from "@/model/pay/pay-content";
-import { ref, computed, reactive, nextTick, defineComponent } from "vue";
+import { ref, reactive, defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import { mapActions, mapGetters, useStore } from "vuex";
 
@@ -37,28 +37,18 @@ export default defineComponent({
             address: "",
             phone: "",
         });
-        const onSubmit = (event: any) => {
-            event.preventDefault();
-            alert(JSON.stringify(form));
-        };
 
-        const onReset = (event: any) => {
-            event.preventDefault();
-            form.name = "";
-            form.address = "";
-            form.phone = "";
-            show.value = false;
-            nextTick(() => {
-                show.value = true;
-            });
-        };
         const store = useStore();
         const router = useRouter();
 
-        return { show, form, store, router, onSubmit, onReset };
+        return { show, form, store, router };
     },
     methods: {
         ...mapActions(["confirmPay"]),
+        async pay(payContent: PayContent) {
+            await this.confirmPay(payContent);
+            this.router.push({ name: "remittance" });
+        },
         backcart() {
             //TODO this.$router.push({ name: 'cart' })
             this.router.go(-1);
@@ -71,7 +61,7 @@ export default defineComponent({
                 value: [],
                 address: this.form.address,
                 name: this.form.name,
-                phone: this.form.phone
+                phone: this.form.phone,
             };
             this.getterCart.forEach((element: CartCommodity) => {
                 result.value.push({
