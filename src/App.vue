@@ -13,6 +13,9 @@
     <div class="container">
       <div class="row justify-content-md-center" id="content-wrap">
         <div class="col-md-6">
+          <div v-if="getterError.show">
+            <ErrorPage />
+          </div>
           <router-view />
         </div>
       </div>
@@ -69,12 +72,22 @@ import { defineComponent } from "vue";
 
 // https://www.npmjs.com/package/vue3-burger-menu
 import { PushRotate } from "vue3-burger-menu";
+import { mapGetters, useStore } from "vuex";
+import ErrorPage from "./components/ErrorPage.vue";
 export default defineComponent({
-  components: {
-    PushRotate,
+  setup() {
+    const store = useStore()
+    return { store }
   },
 
-  methods: {},
+  components: {
+    PushRotate,
+    ErrorPage,
+  },
+
+  computed: {
+    ...mapGetters(["getterError"]),
+  },
 
   data(): { menu: any[] } {
     return {
@@ -96,6 +109,5 @@ export default defineComponent({
       ],
     };
   },
-  computed: {},
 });
 </script>

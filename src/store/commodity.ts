@@ -1,6 +1,7 @@
 import { Module } from "vuex";
-import axios from "axios";
+import axios,{AxiosResponse,AxiosError} from "axios";
 import Commodity from "@/model/commodity/commodity";
+import { Error } from "./error";
 
 interface CommodityState {
   commodities: Commodity[];
@@ -44,8 +45,12 @@ export const commodity: Module<CommodityState, any> = {
           //   },
           // }
         )
-        .then((response) => {
+        .then((response:AxiosResponse<Commodity[],any>) => {
           commit("UPDATE_COMMODITIES", response.data);
+        })
+        .catch((e:AxiosError)=>{
+          console.log(e.code)
+          commit("UPDATE_ERROR",new Error(e.message,e.status,true))
         });
     },
   },
