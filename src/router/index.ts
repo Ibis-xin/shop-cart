@@ -48,8 +48,8 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/remittance",
-    name:"remittance",
-    component:()=>import("@/views/pay/RemittanceView.vue")
+    name: "remittance",
+    component: () => import("@/views/pay/RemittanceView.vue"),
   },
   {
     path: "/commodity/:name",
@@ -66,6 +66,15 @@ const router = createRouter({
   // history:createWebHashHistory(),
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to) => {
+  if (
+    (to.name == "cart" || to.name == "account") &&
+    localStorage.getItem("token") == ""
+  ) {
+    return { name: "login" };
+  } 
 });
 
 export default router;

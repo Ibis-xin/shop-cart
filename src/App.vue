@@ -5,7 +5,8 @@
     <router-link to="/store">Store</router-link> |
   </header>
   <PushRotate>
-    <router-link to="/login">Login</router-link>
+    <router-link v-if="getToken == ''" to="/login">Login</router-link>
+    <b-button v-else @click="clearToken()">Logout</b-button>
     <router-link to="/account">Account</router-link>
     <router-link to="/cart">Cart</router-link>
   </PushRotate>
@@ -20,6 +21,7 @@
         </div>
       </div>
 
+      <div>---{{ store.getters.getToken }}</div>
       <footer class="footer">
         <hr>
         @XIN
@@ -72,8 +74,9 @@ import { defineComponent } from "vue";
 
 // https://www.npmjs.com/package/vue3-burger-menu
 import { PushRotate } from "vue3-burger-menu";
-import { mapGetters, useStore } from "vuex";
+import { mapActions, mapGetters, useStore } from "vuex";
 import ErrorPage from "./components/ErrorPage.vue";
+
 export default defineComponent({
   setup() {
     const store = useStore()
@@ -86,7 +89,11 @@ export default defineComponent({
   },
 
   computed: {
-    ...mapGetters(["getterError"]),
+    ...mapGetters(["getterError", "getToken"]),
+  },
+
+  methods: {
+    ...mapActions(["clearToken"]),
   },
 
   data(): { menu: any[] } {

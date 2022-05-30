@@ -1,5 +1,5 @@
 import { Module } from "vuex";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import Auth from "@/model/login/auth";
 import Token from "@/model/login/token";
 
@@ -10,11 +10,12 @@ interface LoginState {
 export const login: Module<LoginState, any> = {
   state: { token: "" },
   getters: {
-    getToken: (state) => state.token,
+    getToken: ({ token }) => token,
   },
   mutations: {
-    UPDATE_LOGIN({ token }, payload: string) {
-      token = payload;
+    UPDATE_LOGIN(state, payload: string) {
+      state.token = payload;
+      localStorage.setItem("token", payload);
     },
   },
   actions: {
@@ -29,9 +30,12 @@ export const login: Module<LoginState, any> = {
             auth: payload,
           }
         )
-        .then((response) => {
-          commit("UPDATE_LOGIN", (response.data as Token).token);
+        .then((response: AxiosResponse<Token, any>) => {
+          commit("UPDATE_LOGIN", response.data.token);
         });
+    },
+    clearToken({ commit }) {
+      commit("UPDATE_LOGIN", "");
     },
   },
 };

@@ -34,6 +34,7 @@
 
 <script lang="ts">
 import Auth from "@/model/login/auth";
+import router from "@/router";
 import { defineComponent } from "vue";
 import { useStore } from "vuex";
 
@@ -56,6 +57,7 @@ export default defineComponent({
         password: this.loginData.password,
       };
       await this.store.dispatch("postLogin", auth);
+      router.push("account")
     },
   },
   data(): {
