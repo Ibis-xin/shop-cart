@@ -1,5 +1,5 @@
 <template>
-    <b-card-group columns>
+    <b-card-group columns id="goods">
         <commodity-card @click="toCommodity(i.id)" v-for="i in getterCommodities" :key="i.id" :value="i" />
     </b-card-group>
 </template>

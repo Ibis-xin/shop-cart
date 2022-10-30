@@ -12,7 +12,7 @@
 <script lang="ts">
 import CartCommodity from "@/model/cart/cart-commodity";
 import { defineComponent, PropType } from "vue";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 
 export default defineComponent({
     name: "CheckoutCard",

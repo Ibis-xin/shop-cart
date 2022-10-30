@@ -1,18 +1,41 @@
 <template>
   <header class="header">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/store">Store</router-link> |
+    <router-link to="/">
+      Home
+    </router-link> |
+    <router-link to="/about">
+      About
+    </router-link> |
+    <router-link to="/store">
+      Store
+    </router-link> |
   </header>
   <PushRotate>
-    <router-link v-if="getToken == ''" to="/login">Login</router-link>
-    <b-button v-else @click="clearToken()">Logout</b-button>
-    <router-link to="/account">Account</router-link>
-    <router-link to="/cart">Cart</router-link>
+    <router-link
+      v-if="getToken == ''"
+      to="/login"
+    >
+      Login
+    </router-link>
+    <b-button
+      v-else
+      @click="clearToken()"
+    >
+      Logout
+    </b-button>
+    <router-link to="/account">
+      Account
+    </router-link>
+    <router-link to="/cart">
+      Cart
+    </router-link>
   </PushRotate>
   <div id="page-wrap">
     <div class="container">
-      <div class="row justify-content-md-center" id="content-wrap">
+      <div
+        id="content-wrap"
+        class="row justify-content-md-center"
+      >
         <div class="col-md-6">
           <div v-if="getterError.show">
             <ErrorPage />
@@ -29,6 +52,53 @@
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+// https://www.npmjs.com/package/vue3-burger-menu
+import { PushRotate } from "vue3-burger-menu";
+import { mapActions, mapGetters, useStore } from "vuex";
+import ErrorPage from "./components/ErrorPage.vue";
+
+export default defineComponent({
+  components: {
+    PushRotate,
+    ErrorPage,
+  },
+   setup() {
+    const store = useStore()
+    return { store }
+  },
+    data(): { menu: object[] } {
+    return {
+      menu: [
+        {
+          header: "Main Navigation",
+          hiddenOnCollapse: true,
+        },
+        {
+          href: "/login",
+          title: "Login",
+          icon: "fa fa-user",
+        },
+        {
+          href: "/cart",
+          title: "Carts",
+          icon: "fa fa-chart-area",
+        },
+      ],
+    };
+  },
+ 
+  computed: {
+    ...mapGetters(["getterError", "getToken"]),
+  },
+  methods: {
+    ...mapActions(["clearToken"]),
+  },
+});
+</script>
 
 <style lang="scss">
 #app {
@@ -68,53 +138,3 @@
   height: 2.5rem;
 }
 </style>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-// https://www.npmjs.com/package/vue3-burger-menu
-import { PushRotate } from "vue3-burger-menu";
-import { mapActions, mapGetters, useStore } from "vuex";
-import ErrorPage from "./components/ErrorPage.vue";
-
-export default defineComponent({
-  setup() {
-    const store = useStore()
-    return { store }
-  },
-
-  components: {
-    PushRotate,
-    ErrorPage,
-  },
-
-  computed: {
-    ...mapGetters(["getterError", "getToken"]),
-  },
-
-  methods: {
-    ...mapActions(["clearToken"]),
-  },
-
-  data(): { menu: any[] } {
-    return {
-      menu: [
-        {
-          header: "Main Navigation",
-          hiddenOnCollapse: true,
-        },
-        {
-          href: "/login",
-          title: "Login",
-          icon: "fa fa-user",
-        },
-        {
-          href: "/cart",
-          title: "Carts",
-          icon: "fa fa-chart-area",
-        },
-      ],
-    };
-  },
-});
-</script>
